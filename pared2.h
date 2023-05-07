@@ -1,19 +1,18 @@
+
+#ifndef PARED2_H
+#define PARED2_H
 #include <QPainter>
 #include <QGraphicsPixmapItem>
 #include <QPixmap>
 #include <QGraphicsItem>
-#ifndef PARED_H
-#define PARED_H
 
 
-
-
-class pared :  public QGraphicsItem
+class pared2 : public QGraphicsItem
 {
     int posx,posy,alto,bajo;
 public:
-    pared();
-    pared(int x, int y , int alto , int bajo);
+    pared2();
+    pared2(int x, int y , int alto , int bajo);
     QRectF boundingRect() const;//LIMITES DEL RECTANGULO QUE DELIMITA TU OBJETO
     //paint como se mostrara pintado
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
@@ -25,4 +24,4 @@ public:
     void setPosy(int newPosy);
 };
 
-#endif // PARED_H
+#endif // PARED2_H

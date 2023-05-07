@@ -9,6 +9,7 @@
 
 #include <bomber.h>
 #include <pared.h>
+#include <pared2.h>
 #include <QList>
 
 #include <QGraphicsRectItem>
@@ -38,6 +39,8 @@ private:
     QList<pared*> paredes;
 
     QTimer *timer;
+
+    QList<pared2*> paredes2;
 
     bool EvaluarColision();
 

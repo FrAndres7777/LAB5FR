@@ -1,6 +1,26 @@
 
 #include "pared.h"
 
+int pared::getPosx() const
+{
+    return posx;
+}
+
+void pared::setPosx(int newPosx)
+{
+    posx = newPosx;
+}
+
+int pared::getPosy() const
+{
+    return posy;
+}
+
+void pared::setPosy(int newPosy)
+{
+    posy = newPosy;
+}
+
 pared::pared()
 {
 
@@ -22,7 +42,9 @@ QRectF pared::boundingRect() const
 
 void pared::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->setBrush(Qt::gray);
+    QColor myGray(50, 50, 50);
+    painter->setBrush(myGray);
+    //painter->setBrush(Qt::gray);
     painter->drawRect(boundingRect());
 }
 

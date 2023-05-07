@@ -12,12 +12,14 @@ SOURCES += \
     bomber.cpp \
     main.cpp \
     mainwindow.cpp \
-    pared.cpp
+    pared.cpp \
+    pared2.cpp
 
 HEADERS += \
     bomber.h \
     mainwindow.h \
-    pared.h
+    pared.h \
+    pared2.h
 
 FORMS += \
     mainwindow.ui
