@@ -8,6 +8,8 @@
 #include <QTimer>
 
 #include <bomber.h>
+#include <pared.h>
+#include <QList>
 
 #include <QGraphicsRectItem>
 
@@ -33,8 +35,11 @@ private:
     //creamos el objeto B00omberr
     BOMBER *Franklin;
     void keyPressEvent(QKeyEvent *evento);
+    QList<pared*> paredes;
 
     QTimer *timer;
+
+    bool EvaluarColision();
 
 
 };

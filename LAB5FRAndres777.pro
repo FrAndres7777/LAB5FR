@@ -11,11 +11,13 @@ CONFIG += c++17
 SOURCES += \
     bomber.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    pared.cpp
 
 HEADERS += \
     bomber.h \
-    mainwindow.h
+    mainwindow.h \
+    pared.h
 
 FORMS += \
     mainwindow.ui

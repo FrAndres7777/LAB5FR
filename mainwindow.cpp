@@ -12,11 +12,26 @@ MainWindow::MainWindow(QWidget *parent)
     //ahora lo asociamos al grafics view
     ui->graphicsView->setScene(scene);
     // los valores de la scena respecro a grafic view
-    scene->setSceneRect(0,0,1400,750);
+    scene->setSceneRect(0,0,1200,650);
     //CREAMOS EL BOMBER
-    Franklin = new BOMBER (0,0,25);
+    Franklin = new BOMBER (25,25,25);
     //hacer que bomber haga parte del acto (scena)
     scene->addItem(Franklin);
+
+    paredes.push_back(new pared(0,0,1200,50));
+    scene->addItem(paredes.back());
+
+    paredes.push_back(new pared(0,0,50,650));
+    scene->addItem(paredes.back());
+
+    paredes.push_back(new pared(600,0,50,650));
+    scene->addItem(paredes.back());
+
+    paredes.push_back(new pared(0,300,1200,50));
+    scene->addItem(paredes.back());
+
+
+
 
 
 }
@@ -24,7 +39,13 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
 {
     if(evento->key()==Qt::Key_W)
     {
-        Franklin->MoveUp();
+        if(!EvaluarColision()){
+            Franklin->MoveUp();
+
+        }else{
+            Franklin->MoveDown();
+        }
+
     }
 
     else if(evento->key()==Qt::Key_2)
@@ -39,6 +60,18 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
     {
         Franklin->MoveLeft();
     }
+}
+
+bool MainWindow::EvaluarColision()
+{
+    QList<pared*>::Iterator it;
+    for(it=paredes.begin();it!= paredes.end();it++){
+        if((*it)->collidesWithItem(Franklin))
+        {
+            return true;
+        }
+    }
+    return false;
 }
 
 MainWindow::~MainWindow()
