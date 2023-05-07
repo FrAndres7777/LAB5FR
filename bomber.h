@@ -33,6 +33,8 @@ public:
     void setPosx(int newPosx);
     int getPosy() const;
     void setPosy(int newPosy);
+    int getVelocidad() const;
+    void setVelocidad(int newVelocidad);
 };
 
 #endif // BOMBER_H

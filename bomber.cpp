@@ -21,10 +21,20 @@ void BOMBER::setPosy(int newPosy)
     posy = newPosy;
 }
 
+int BOMBER::getVelocidad() const
+{
+    return velocidad;
+}
+
+void BOMBER::setVelocidad(int newVelocidad)
+{
+    velocidad = newVelocidad;
+}
+
 BOMBER::BOMBER()
 {
     this->radio=25;
-    this->velocidad=5;
+    this->velocidad=1;
 
 }
 

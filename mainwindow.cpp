@@ -14,7 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
     // los valores de la scena respecro a grafic view
     scene->setSceneRect(0,0,1200,650);
     //CREAMOS EL BOMBER
-    Franklin = new BOMBER (25,25,25);
+    Franklin = new BOMBER (25,25,20);
     //hacer que bomber haga parte del acto (scena)
     scene->addItem(Franklin);
 
@@ -30,6 +30,17 @@ MainWindow::MainWindow(QWidget *parent)
     paredes.push_back(new pared(0,300,1200,50));
     scene->addItem(paredes.back());
 
+    paredes.push_back(new pared(50,250,1050,50));
+    scene->addItem(paredes.back());
+
+    for(int i = 1 ; i < 6 ; i++){
+        for(int j = 1 ; j< 12 ;j++){
+            paredes.push_back(new pared(50*j,50*i,50,50));
+            scene->addItem(paredes.back());
+
+        }
+    }
+
 
 
 
@@ -37,6 +48,10 @@ MainWindow::MainWindow(QWidget *parent)
 }
 void MainWindow::keyPressEvent(QKeyEvent *evento)
 {
+    int x,y;
+    x=Franklin->getPosx();
+    y=Franklin->getPosy();
+
     if(evento->key()==Qt::Key_W)
     {
         if(!EvaluarColision()){
@@ -44,22 +59,49 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
 
         }else{
             Franklin->MoveDown();
+            //Franklin->setPos(x,y+10);
+
         }
 
     }
 
-    else if(evento->key()==Qt::Key_2)
+    else if(evento->key()==Qt::Key_S)
     {
-        Franklin->MoveDown();
+        if(!EvaluarColision()){
+            Franklin->MoveDown();
+
+        }else{
+            Franklin->MoveUp();
+        }
+
     }
-    else if(evento->key()==Qt::Key_3)
+    else if(evento->key()==Qt::Key_D)
     {
-        Franklin->MoveRight();
+        if(!EvaluarColision()){
+            Franklin->MoveRight();
+
+        }else{
+            Franklin->MoveLeft();
+        }
+
     }
-    else if(evento->key()==Qt::Key_1)
+    else if(evento->key()==Qt::Key_A)
     {
-        Franklin->MoveLeft();
-    }
+        if(!EvaluarColision()){
+
+            Franklin->MoveLeft();
+
+
+        }else{
+
+            Franklin->MoveRight();
+
+
+        }
+
+   }else if(evento->key()==Qt::Key_M){
+        Franklin->setPos(25,25);
+        }
 }
 
 bool MainWindow::EvaluarColision()
