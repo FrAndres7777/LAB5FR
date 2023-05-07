@@ -3,6 +3,7 @@
 #define BOMBER_H
 #include <QPainter>
 #include <QGraphicsPixmapItem>
+#include <QPixmap>
 #include <QGraphicsItem>// CONFERERIR CAPACIDAD DE SER OBJETOS VISIBLES
 
 
