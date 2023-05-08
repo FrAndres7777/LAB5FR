@@ -142,6 +142,7 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
 
    }else if(evento->key()==Qt::Key_Space){
         GRANADAS_FUEGO.push_back(new BOMBA(Franklin->getPosx(),Franklin->getPosy(),40,40));
+        scene->addItem(GRANADAS_FUEGO.back());
         INCINERAR();
         }
 }
@@ -164,6 +165,9 @@ bool MainWindow::EvaluarColision2()
     for(it=paredes2.begin();it!= paredes2.end();it++){
         if((*it)->collidesWithItem(Franklin))
         {
+
+            //scene->removeItem(*it);
+            //paredes2.removeOne(*it);
             return true;
         }
     }
@@ -184,7 +188,7 @@ void MainWindow::INCINERAR()
         //scene->removeItem(*it);
         int x= (*it)->getPosx();
         int y = (*it)->getPosy();
-        for(float i = 1; i<45;i=i+7.5){
+        for(float i = 1; i<35;i=i+7.5){
             GRANADAS_EXPLOXION.push_back(new BOMBA((x+25+i),y,40,40));
             scene->addItem(GRANADAS_EXPLOXION.back());
 
@@ -198,9 +202,26 @@ void MainWindow::INCINERAR()
             scene->addItem(GRANADAS_EXPLOXION.back());
         }
     }
+    EvaluarColision3();
     GRANADAS_FUEGO.clear();
 }
 
+void MainWindow::EvaluarColision3()
+{
+    QList<pared2*>::Iterator it;
+    for(it=paredes2.begin();it!= paredes2.end();it++){
+        for(auto it2 =GRANADAS_EXPLOXION.begin();  it2!= GRANADAS_EXPLOXION.end(); it2++){
+            if((*it)->collidesWithItem(*it2)){
+                scene->removeItem(*it);
+                paredes2.removeOne(*it);
 
+            }
+        }
+    }
+    return ;
 
+}
+
+//scene->removeItem(*it);
+//paredes2.removeOne(*it);
 
