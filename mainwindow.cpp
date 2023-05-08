@@ -81,9 +81,9 @@ MainWindow::MainWindow(QWidget *parent)
 }
 void MainWindow::keyPressEvent(QKeyEvent *evento)
 {
-    int x,y;
-    x=Franklin->getPosx();
-    y=Franklin->getPosy();
+    //int x,y;
+    //x=Franklin->getPosx();
+    //y=Franklin->getPosy();
 
     if(evento->key()==Qt::Key_W)
     {
@@ -123,13 +123,9 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
         if(!EvaluarColision() and !EvaluarColision2()){
 
             Franklin->MoveLeft();
-            /*for(auto it = GRANADAS_FUEGO.begin(); it != GRANADAS_FUEGO.end();it++){
-                scene->removeItem(*it);
-            }
-            GRANADAS_FUEGO.clear()
-            */
 
-            //INCINERAR();
+
+
 
 
 
@@ -143,7 +139,14 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
    }else if(evento->key()==Qt::Key_Space){
         GRANADAS_FUEGO.push_back(new BOMBA(Franklin->getPosx(),Franklin->getPosy(),40,40));
         scene->addItem(GRANADAS_FUEGO.back());
-        INCINERAR();
+        //INCINERAR();
+        QTimer::singleShot(3000,this, SLOT(INCINERAR()));
+
+
+
+
+
+
         }
 }
 
@@ -188,7 +191,7 @@ void MainWindow::INCINERAR()
         //scene->removeItem(*it);
         int x= (*it)->getPosx();
         int y = (*it)->getPosy();
-        for(float i = 1; i<35;i=i+7.5){
+        for(float i = 1.0; i<35.0;i=i+7.5){
             GRANADAS_EXPLOXION.push_back(new BOMBA((x+25+i),y,40,40));
             scene->addItem(GRANADAS_EXPLOXION.back());
 
@@ -203,7 +206,8 @@ void MainWindow::INCINERAR()
         }
     }
     EvaluarColision3();
-    GRANADAS_FUEGO.clear();
+    //QTimer::singleShot(1000,this, SLOT(VaciarListas()));
+
 }
 
 void MainWindow::EvaluarColision3()
@@ -218,10 +222,47 @@ void MainWindow::EvaluarColision3()
             }
         }
     }
+    //QTimer::singleShot(1000,this, SLOT(VaciarListas()));
+
+
+    for(auto it = GRANADAS_FUEGO.begin(); it != GRANADAS_FUEGO.end();it++){
+        scene->removeItem(*it);
+    }
+    GRANADAS_FUEGO.clear();
+
+    for(auto it2 = GRANADAS_EXPLOXION.begin(); it2 != GRANADAS_EXPLOXION.end();it2++){
+        scene->removeItem(*it2);
+    }
+    GRANADAS_EXPLOXION.clear();
     return ;
 
 }
 
+void MainWindow::VaciarListas()
+{
+    // Hacer una copia de las listas originales
+    QList<BOMBA*> granadasExplo = GRANADAS_EXPLOXION;
+    QList<BOMBA*> granadasFuego = GRANADAS_FUEGO;
+
+    // Eliminar los elementos de la escena y de las listas
+    for(auto it = granadasExplo.begin(); it != granadasExplo.end(); ++it){
+        scene->removeItem(*it);
+        GRANADAS_EXPLOXION.removeOne(*it);
+    }
+    for(auto it2 = granadasFuego.begin(); it2 != granadasFuego.end(); ++it2){
+        scene->removeItem(*it2);
+        GRANADAS_FUEGO.removeOne(*it2);
+    }
+
+    // Limpiar las listas originales
+    GRANADAS_EXPLOXION.clear();
+    GRANADAS_FUEGO.clear();
+}
+
+
 //scene->removeItem(*it);
 //paredes2.removeOne(*it);
+
+
+
 

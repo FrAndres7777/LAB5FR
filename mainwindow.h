@@ -49,6 +49,7 @@ private:
     bool EvaluarColision();
     bool EvaluarColision2();
     void EvaluarColision3();
+    void VaciarListas();
 
 
     QList<BOMBA*> GRANADAS_FUEGO;
