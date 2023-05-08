@@ -30,6 +30,9 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void INCINERAR();
+
 private:
 
     Ui::MainWindow *ui;// *UI PUNTERO A LA INTERFAZ GRA  // REFERNCIA PARA CADA UNO DE LOS OBJETOS
@@ -48,6 +51,7 @@ private:
 
 
     QList<BOMBA*> GRANADAS_FUEGO;
+    QList<BOMBA*> GRANADAS_EXPLOXION;
 
 
 

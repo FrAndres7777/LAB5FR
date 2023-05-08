@@ -123,6 +123,14 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
         if(!EvaluarColision() and !EvaluarColision2()){
 
             Franklin->MoveLeft();
+            /*for(auto it = GRANADAS_FUEGO.begin(); it != GRANADAS_FUEGO.end();it++){
+                scene->removeItem(*it);
+            }
+            GRANADAS_FUEGO.clear()
+            */
+
+            //INCINERAR();
+
 
 
         }else{
@@ -132,9 +140,9 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
 
         }
 
-   }else if(evento->key()==Qt::Key_M){
-        GRANADAS_FUEGO.push_back(new BOMBA(25,25,40,40));
-        scene->addItem(new BOMBA(25,25,40,40));
+   }else if(evento->key()==Qt::Key_Space){
+        GRANADAS_FUEGO.push_back(new BOMBA(Franklin->getPosx(),Franklin->getPosy(),40,40));
+        INCINERAR();
         }
 }
 
@@ -166,6 +174,31 @@ bool MainWindow::EvaluarColision2()
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::INCINERAR()
+{
+    //GRANADAS_EXPLOXION.push_back( new BOMBA(25,50,10,10));
+    //scene->addItem(GRANADAS_EXPLOXION.back());
+    for(auto it = GRANADAS_FUEGO.begin(); it != GRANADAS_FUEGO.end();it++){
+        //scene->removeItem(*it);
+        int x= (*it)->getPosx();
+        int y = (*it)->getPosy();
+        for(float i = 1; i<45;i=i+7.5){
+            GRANADAS_EXPLOXION.push_back(new BOMBA((x+25+i),y,40,40));
+            scene->addItem(GRANADAS_EXPLOXION.back());
+
+            GRANADAS_EXPLOXION.push_back(new BOMBA((x-25-i),y,40,40));
+            scene->addItem(GRANADAS_EXPLOXION.back());
+
+            GRANADAS_EXPLOXION.push_back(new BOMBA((x),y+25+i,40,40));
+            scene->addItem(GRANADAS_EXPLOXION.back());
+
+            GRANADAS_EXPLOXION.push_back(new BOMBA((x),y-25-i,40,40));
+            scene->addItem(GRANADAS_EXPLOXION.back());
+        }
+    }
+    GRANADAS_FUEGO.clear();
 }
 
 
