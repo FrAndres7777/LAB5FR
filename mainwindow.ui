@@ -27,6 +27,32 @@
      <string notr="true">background-color: rgb(0, 163, 0);</string>
     </property>
    </widget>
+   <widget class="QLabel" name="lblPuntaje">
+    <property name="geometry">
+     <rect>
+      <x>530</x>
+      <y>0</y>
+      <width>231</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Garamond</family>
+      <pointsize>22</pointsize>
+      <italic>true</italic>
+      <bold>false</bold>
+      <underline>true</underline>
+      <strikeout>true</strikeout>
+     </font>
+    </property>
+    <property name="tabletTracking">
+     <bool>false</bool>
+    </property>
+    <property name="text">
+     <string>PUNTAJE </string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

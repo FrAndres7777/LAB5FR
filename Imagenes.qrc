@@ -2,6 +2,8 @@
     <qresource prefix="/imagen">
         <file>ninja.png</file>
         <file>fuego.png</file>
+        <file>fantasma.png</file>
     </qresource>
     <qresource prefix="/new/prefix1"/>
+    <qresource prefix="/"/>
 </RCC>

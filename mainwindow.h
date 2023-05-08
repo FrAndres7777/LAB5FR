@@ -6,7 +6,7 @@
 #include <QGraphicsScene >
 #include <QKeyEvent>
 #include <QTimer>
-
+#include <enemy.h>
 #include <bomber.h>
 #include <pared.h>
 #include <pared2.h>
@@ -32,6 +32,7 @@ public:
 
 private slots:
     void INCINERAR();
+    void moverEnemigo();
 
 private:
 
@@ -39,17 +40,21 @@ private:
     QGraphicsScene *scene; // instanciamos scena
     //creamos el objeto B00omberr
     BOMBER *Franklin;
+    ENEMY  *Enemigo;
     void keyPressEvent(QKeyEvent *evento);
     QList<pared*> paredes;
 
     QTimer *timer;
 
     QList<pared2*> paredes2;
-
+    void imprimirpPuntaje();
     bool EvaluarColision();
     bool EvaluarColision2();
     void EvaluarColision3();
     void VaciarListas();
+
+    int puntaje=0;
+
 
 
     QList<BOMBA*> GRANADAS_FUEGO;

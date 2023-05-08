@@ -11,6 +11,7 @@ CONFIG += c++17
 SOURCES += \
     bomba.cpp \
     bomber.cpp \
+    enemy.cpp \
     main.cpp \
     mainwindow.cpp \
     pared.cpp \
@@ -19,6 +20,7 @@ SOURCES += \
 HEADERS += \
     bomba.h \
     bomber.h \
+    enemy.h \
     mainwindow.h \
     pared.h \
     pared2.h
@@ -34,5 +36,4 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 RESOURCES += \
     Imagenes.qrc
 
-DISTFILES += \
-    ../../Downloads/fuego.png
+DISTFILES +=

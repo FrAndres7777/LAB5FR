@@ -17,8 +17,11 @@ MainWindow::MainWindow(QWidget *parent)
     scene->setSceneRect(0,0,1200,650);
     //CREAMOS EL BOMBER
     Franklin = new BOMBER (25,25,20);
+    Enemigo = new ENEMY(575,275,25);
     //hacer que bomber haga parte del acto (scena)
     scene->addItem(Franklin);
+    scene->addItem(Enemigo);
+
 
     paredes.push_back(new pared(0,0,1200,50));
     scene->addItem(paredes.back());
@@ -31,6 +34,13 @@ MainWindow::MainWindow(QWidget *parent)
 
     paredes.push_back(new pared(0,300,1200,50));
     scene->addItem(paredes.back());
+
+    QTimer* timer = new QTimer(this);
+    timer->setInterval(1000); // intervalo en milisegundos
+    timer->start(); // iniciar el temporizador
+
+    // Conectar la señal timeout() del temporizador al slot moverEnemigo()
+    connect(timer, &QTimer::timeout, this, &MainWindow::moverEnemigo);
 
 
 
@@ -79,11 +89,21 @@ MainWindow::MainWindow(QWidget *parent)
 
 
 }
+
+
+void MainWindow:: moverEnemigo(){
+    Enemigo->MoveLeft();
+
+
+
+}
+
 void MainWindow::keyPressEvent(QKeyEvent *evento)
 {
     //int x,y;
     //x=Franklin->getPosx();
     //y=Franklin->getPosy();
+    imprimirpPuntaje();
 
     if(evento->key()==Qt::Key_W)
     {
@@ -137,17 +157,33 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
         }
 
    }else if(evento->key()==Qt::Key_Space){
+        for(auto it = GRANADAS_FUEGO.begin(); it != GRANADAS_FUEGO.end();it++){
+            scene->removeItem(*it);
+        }
+        GRANADAS_FUEGO.clear();
+
+        for(auto it2 = GRANADAS_EXPLOXION.begin(); it2 != GRANADAS_EXPLOXION.end();it2++){
+            scene->removeItem(*it2);
+        }
+        GRANADAS_EXPLOXION.clear();
+
         GRANADAS_FUEGO.push_back(new BOMBA(Franklin->getPosx(),Franklin->getPosy(),40,40));
         scene->addItem(GRANADAS_FUEGO.back());
         //INCINERAR();
-        QTimer::singleShot(3000,this, SLOT(INCINERAR()));
+        QTimer::singleShot(4000,this, SLOT(INCINERAR()));
 
 
 
 
 
 
-        }
+   }
+}
+
+void MainWindow::imprimirpPuntaje()
+{
+   QString score =QString( "POINTSS %1 ").arg(puntaje);
+   ui->lblPuntaje->setText(score);
 }
 
 bool MainWindow::EvaluarColision()
@@ -191,7 +227,7 @@ void MainWindow::INCINERAR()
         //scene->removeItem(*it);
         int x= (*it)->getPosx();
         int y = (*it)->getPosy();
-        for(float i = 1.0; i<35.0;i=i+7.5){
+        for(float i = 1.0; i<28.0;i=i+7.5){
             GRANADAS_EXPLOXION.push_back(new BOMBA((x+25+i),y,40,40));
             scene->addItem(GRANADAS_EXPLOXION.back());
 
@@ -218,45 +254,31 @@ void MainWindow::EvaluarColision3()
             if((*it)->collidesWithItem(*it2)){
                 scene->removeItem(*it);
                 paredes2.removeOne(*it);
+                puntaje+=750;
 
             }
         }
     }
-    //QTimer::singleShot(1000,this, SLOT(VaciarListas()));
+    // QTimer::singleShot(500,this, SLOT(VaciarListas()));
 
 
-    for(auto it = GRANADAS_FUEGO.begin(); it != GRANADAS_FUEGO.end();it++){
-        scene->removeItem(*it);
-    }
-    GRANADAS_FUEGO.clear();
 
-    for(auto it2 = GRANADAS_EXPLOXION.begin(); it2 != GRANADAS_EXPLOXION.end();it2++){
-        scene->removeItem(*it2);
-    }
-    GRANADAS_EXPLOXION.clear();
+
     return ;
 
 }
 
 void MainWindow::VaciarListas()
 {
-    // Hacer una copia de las listas originales
-    QList<BOMBA*> granadasExplo = GRANADAS_EXPLOXION;
-    QList<BOMBA*> granadasFuego = GRANADAS_FUEGO;
-
-    // Eliminar los elementos de la escena y de las listas
-    for(auto it = granadasExplo.begin(); it != granadasExplo.end(); ++it){
+    for(auto it = GRANADAS_FUEGO.begin(); it != GRANADAS_FUEGO.end();it++){
         scene->removeItem(*it);
-        GRANADAS_EXPLOXION.removeOne(*it);
     }
-    for(auto it2 = granadasFuego.begin(); it2 != granadasFuego.end(); ++it2){
-        scene->removeItem(*it2);
-        GRANADAS_FUEGO.removeOne(*it2);
-    }
+    //GRANADAS_FUEGO.clear();
 
-    // Limpiar las listas originales
-    GRANADAS_EXPLOXION.clear();
-    GRANADAS_FUEGO.clear();
+    for(auto it2 = GRANADAS_EXPLOXION.begin(); it2 != GRANADAS_EXPLOXION.end();it2++){
+        scene->removeItem(*it2);
+    }
+    //GRANADAS_EXPLOXION.clear();
 }
 
 
