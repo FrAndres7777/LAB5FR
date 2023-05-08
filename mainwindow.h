@@ -33,6 +33,7 @@ public:
 private slots:
     void INCINERAR();
     void moverEnemigo();
+    void moverEnemigo2();
 
 private:
 
@@ -41,10 +42,13 @@ private:
     //creamos el objeto B00omberr
     BOMBER *Franklin;
     ENEMY  *Enemigo;
+    ENEMY  *Enemigo2;
+
     void keyPressEvent(QKeyEvent *evento);
     QList<pared*> paredes;
 
     QTimer *timer;
+    QTimer *timer2;
 
     QList<pared2*> paredes2;
     void imprimirpPuntaje();

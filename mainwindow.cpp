@@ -18,9 +18,11 @@ MainWindow::MainWindow(QWidget *parent)
     //CREAMOS EL BOMBER
     Franklin = new BOMBER (25,25,20);
     Enemigo = new ENEMY(575,275,25);
+    Enemigo2 = new ENEMY(575,50,25);
     //hacer que bomber haga parte del acto (scena)
     scene->addItem(Franklin);
     scene->addItem(Enemigo);
+    scene->addItem(Enemigo2);
 
 
     paredes.push_back(new pared(0,0,1200,50));
@@ -37,7 +39,11 @@ MainWindow::MainWindow(QWidget *parent)
 
     timer =  new QTimer;
     connect(timer,SIGNAL(timeout()),this, SLOT(moverEnemigo()));
+
     timer->stop();
+    timer2 =  new QTimer;
+    connect(timer2,SIGNAL(timeout()),this, SLOT(moverEnemigo2()));
+    timer2->stop();
 
 
 
@@ -90,6 +96,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 
 void MainWindow:: moverEnemigo(){
+    moverEnemigo2();
     int xE= 0, yE = 0, xJ= 0, yJ = 0;
     xE= Enemigo->getPosx();
     yE = Enemigo->getPosy();
@@ -128,6 +135,45 @@ void MainWindow:: moverEnemigo(){
 
 }
 
+void MainWindow:: moverEnemigo2(){
+    int xE= 0, yE = 0, xJ= 0, yJ = 0;
+    xE= Enemigo2->getPosx();
+    yE = Enemigo2->getPosy();
+    xJ= Franklin->getPosx();
+    yJ = Franklin->getPosy();
+    int Dx=0,Dy=0;
+    if(xE-xJ<0){
+        Dx=(xE-xJ)*(-1);
+    }else{
+        Dx=(xE-xJ);
+    }
+
+    if(yE-yJ<0){
+        Dy=(yE-yJ)*(-1);
+    }else{
+        Dy=(yE-yJ);
+    }
+    if(Dx>Dy){
+        if(xE-xJ<0){
+            Enemigo2->MoveRight();
+
+        }else{
+            Enemigo2->MoveLeft();
+        }
+    }else{
+        if(yE-yJ<0){
+            Enemigo2->MoveDown();
+        }else{
+            Enemigo2->MoveUp();
+        }
+    }
+
+
+
+
+
+}
+
 void MainWindow::keyPressEvent(QKeyEvent *evento)
 {
 
@@ -135,6 +181,9 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
     //x=Franklin->getPosx();
     //y=Franklin->getPosy();
     imprimirpPuntaje();
+    if(Franklin->collidesWithItem(Enemigo) or Franklin->collidesWithItem(Enemigo2)){
+        close();
+    }
 
     if(evento->key()==Qt::Key_W)
     {
@@ -208,10 +257,18 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
 
 
 
+
    }
    if(evento->key()== Qt::Key_M){
-        if(timer->isActive()) timer->stop();
-        else timer->start(50);
+        if(timer->isActive()) {timer->stop();
+        }else {timer->start(50);
+            }
+
+        if(timer2->isActive()) {
+            timer2->stop();
+        }else{
+            timer2->start(50);
+        }
 
    }
 }
@@ -243,6 +300,7 @@ bool MainWindow::EvaluarColision2()
 
             //scene->removeItem(*it);
             //paredes2.removeOne(*it);
+
             return true;
         }
     }
