@@ -32,7 +32,6 @@ public:
     void MoveDown();
     void MoveLeft();
     void MoveRight();
-
     int getPosx() const;
     void setPosx(int newPosx);
     int getPosy() const;

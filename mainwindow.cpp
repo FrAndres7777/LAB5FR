@@ -35,12 +35,10 @@ MainWindow::MainWindow(QWidget *parent)
     paredes.push_back(new pared(0,300,1200,50));
     scene->addItem(paredes.back());
 
-    QTimer* timer = new QTimer(this);
-    timer->setInterval(1000); // intervalo en milisegundos
-    timer->start(); // iniciar el temporizador
+    timer =  new QTimer;
+    connect(timer,SIGNAL(timeout()),this, SLOT(moverEnemigo()));
+    timer->stop();
 
-    // Conectar la señal timeout() del temporizador al slot moverEnemigo()
-    connect(timer, &QTimer::timeout, this, &MainWindow::moverEnemigo);
 
 
 
@@ -92,7 +90,39 @@ MainWindow::MainWindow(QWidget *parent)
 
 
 void MainWindow:: moverEnemigo(){
-    Enemigo->MoveLeft();
+    int xE= 0, yE = 0, xJ= 0, yJ = 0;
+    xE= Enemigo->getPosx();
+    yE = Enemigo->getPosy();
+    xJ= Franklin->getPosx();
+    yJ = Franklin->getPosy();
+    int Dx=0,Dy=0;
+    if(xE-xJ<0){
+        Dx=(xE-xJ)*(-1);
+    }else{
+        Dx=(xE-xJ);
+    }
+
+    if(yE-yJ<0){
+        Dy=(yE-yJ)*(-1);
+    }else{
+        Dy=(yE-yJ);
+    }
+    if(Dx>Dy){
+        if(xE-xJ<0){
+            Enemigo->MoveRight();
+
+        }else{
+            Enemigo->MoveLeft();
+        }
+    }else{
+        if(yE-yJ<0){
+            Enemigo->MoveDown();
+        }else{
+            Enemigo->MoveUp();
+        }
+    }
+
+
 
 
 
@@ -100,6 +130,7 @@ void MainWindow:: moverEnemigo(){
 
 void MainWindow::keyPressEvent(QKeyEvent *evento)
 {
+
     //int x,y;
     //x=Franklin->getPosx();
     //y=Franklin->getPosy();
@@ -176,6 +207,11 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
 
 
 
+
+   }
+   if(evento->key()== Qt::Key_M){
+        if(timer->isActive()) timer->stop();
+        else timer->start(8);
 
    }
 }
