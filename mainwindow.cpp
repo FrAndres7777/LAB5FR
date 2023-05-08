@@ -17,6 +17,7 @@ MainWindow::MainWindow(QWidget *parent)
     scene->setSceneRect(0,0,1200,650);
     //CREAMOS EL BOMBER
     Franklin = new BOMBER (25,25,20);
+
     Enemigo = new ENEMY(575,275,25);
     Enemigo2 = new ENEMY(575,50,25);
     //hacer que bomber haga parte del acto (scena)
@@ -75,13 +76,24 @@ MainWindow::MainWindow(QWidget *parent)
             random_2 = rand() % 11 +1;
             paredes2.push_back(new pared2(25+50*random_2,25*random_1,50,50));
             scene->addItem(paredes2.back());
+            if(cbloq==5){
+                Franklin2 = new BOMBER (25+50*random_2,25*random_1,19);
+                scene->addItem(Franklin2);
+            }
+
         }else{
             random_2 = rand() % 21 +2;
             paredes2.push_back(new pared2(25*random_2,25*random_1,50,50));
             scene->addItem(paredes2.back());
+            if(cbloq==5){
+                Franklin2 = new BOMBER (25*random_2,25*random_1,19);
+                scene->addItem(Franklin2);
+            }
+
 
 
         }
+
 
     }
 
@@ -181,9 +193,10 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
     //x=Franklin->getPosx();
     //y=Franklin->getPosy();
     imprimirpPuntaje();
-    if(Franklin->collidesWithItem(Enemigo) or Franklin->collidesWithItem(Enemigo2)){
+    if(Franklin->collidesWithItem(Enemigo) or Franklin->collidesWithItem(Enemigo2) or Franklin->collidesWithItem(Franklin2)){
         close();
     }
+
 
     if(evento->key()==Qt::Key_W)
     {
