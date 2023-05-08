@@ -351,8 +351,34 @@ void MainWindow::EvaluarColision3()
                 puntaje+=750;
 
             }
+            if((*it2)->collidesWithItem(Enemigo)){
+
+                Enemigo= new ENEMY(0,0,0);
+                Enemigo->setVelocidad(0);
+                Enemigo->setPos(0,0);
+                scene->removeItem(Enemigo); // Elimina el objeto de la escena
+                //delete Enemigo; // Elimina el objeto de la memoria
+                //Enemigo = nullptr; // Asigna un puntero nulo para evitar problemas de punteros invalidos
+                break;
+
+            }
+
+            if((*it2)->collidesWithItem(Enemigo2)){
+                Enemigo2= new ENEMY(0,0,0);
+                Enemigo2->setVelocidad(0);
+                Enemigo2->setPos(0,0);
+                //scene->removeItem(Enemigo2); // Elimina el objeto de la escena
+                //delete Enemigo2; // Elimina el objeto de la memoria
+                //Enemigo2 = nullptr; // Asigna un puntero nulo para evitar problemas de punteros invalidos
+                break;
+
+                }
         }
     }
+
+
+
+
     // QTimer::singleShot(500,this, SLOT(VaciarListas()));
 
 

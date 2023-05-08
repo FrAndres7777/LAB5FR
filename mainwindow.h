@@ -40,9 +40,10 @@ private:
     Ui::MainWindow *ui;// *UI PUNTERO A LA INTERFAZ GRA  // REFERNCIA PARA CADA UNO DE LOS OBJETOS
     QGraphicsScene *scene; // instanciamos scena
     //creamos el objeto B00omberr
-    BOMBER *Franklin;
-    ENEMY  *Enemigo;
-    ENEMY  *Enemigo2;
+    BOMBER *Franklin;// jugador principal
+    BOMBER *Franklin2;//compañero a encontar
+    ENEMY  *Enemigo;// neas fantasmas
+    ENEMY  *Enemigo2;// nea 2
 
     void keyPressEvent(QKeyEvent *evento);
     QList<pared*> paredes;
