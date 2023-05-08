@@ -211,7 +211,7 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
    }
    if(evento->key()== Qt::Key_M){
         if(timer->isActive()) timer->stop();
-        else timer->start(8);
+        else timer->start(50);
 
    }
 }

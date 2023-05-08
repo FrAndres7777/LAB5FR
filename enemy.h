@@ -15,7 +15,8 @@
 class ENEMY: public QGraphicsItem
 {
     //ATRIBUTOs
-    int posx,posy,radio,velocidad; //radio tamaño de la figura
+    int posx,posy,radio;
+    float velocidad; //radio tamaño de la figura
 
 
 public:
