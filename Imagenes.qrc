@@ -1,5 +1,7 @@
 <RCC>
     <qresource prefix="/imagen">
         <file>ninja.png</file>
+        <file>fuego.png</file>
     </qresource>
+    <qresource prefix="/new/prefix1"/>
 </RCC>

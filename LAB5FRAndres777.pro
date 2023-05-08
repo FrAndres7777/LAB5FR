@@ -9,6 +9,7 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    bomba.cpp \
     bomber.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -16,6 +17,7 @@ SOURCES += \
     pared2.cpp
 
 HEADERS += \
+    bomba.h \
     bomber.h \
     mainwindow.h \
     pared.h \
@@ -32,4 +34,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 RESOURCES += \
     Imagenes.qrc
 
-DISTFILES +=
+DISTFILES += \
+    ../../Downloads/fuego.png

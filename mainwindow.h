@@ -11,6 +11,7 @@
 #include <pared.h>
 #include <pared2.h>
 #include <QList>
+#include <bomba.h>
 
 #include <QGraphicsRectItem>
 
@@ -43,6 +44,11 @@ private:
     QList<pared2*> paredes2;
 
     bool EvaluarColision();
+    bool EvaluarColision2();
+
+
+    QList<BOMBA*> GRANADAS_FUEGO;
+
 
 
 };

@@ -87,7 +87,7 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
 
     if(evento->key()==Qt::Key_W)
     {
-        if(!EvaluarColision()){
+        if(!EvaluarColision() and !EvaluarColision2()){
             Franklin->MoveUp();
 
         }else{
@@ -100,7 +100,7 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
 
     else if(evento->key()==Qt::Key_S)
     {
-        if(!EvaluarColision()){
+        if(!EvaluarColision() and !EvaluarColision2()){
             Franklin->MoveDown();
 
         }else{
@@ -110,7 +110,7 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
     }
     else if(evento->key()==Qt::Key_D)
     {
-        if(!EvaluarColision()){
+        if(!EvaluarColision() and !EvaluarColision2()){
             Franklin->MoveRight();
 
         }else{
@@ -120,7 +120,7 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
     }
     else if(evento->key()==Qt::Key_A)
     {
-        if(!EvaluarColision()){
+        if(!EvaluarColision() and !EvaluarColision2()){
 
             Franklin->MoveLeft();
 
@@ -133,7 +133,8 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
         }
 
    }else if(evento->key()==Qt::Key_M){
-        Franklin->setPos(25,25);
+        GRANADAS_FUEGO.push_back(new BOMBA(25,25,40,40));
+        scene->addItem(new BOMBA(25,25,40,40));
         }
 }
 
@@ -147,6 +148,19 @@ bool MainWindow::EvaluarColision()
         }
     }
     return false;
+}
+
+bool MainWindow::EvaluarColision2()
+{
+    QList<pared2*>::Iterator it;
+    for(it=paredes2.begin();it!= paredes2.end();it++){
+        if((*it)->collidesWithItem(Franklin))
+        {
+            return true;
+        }
+    }
+    return false;
+
 }
 
 MainWindow::~MainWindow()
