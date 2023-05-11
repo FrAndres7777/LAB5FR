@@ -42,6 +42,9 @@ QRectF pared2::boundingRect() const
 
 void pared2::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->setBrush(Qt::gray);
-    painter->drawRect(boundingRect());
+    //painter->setBrush(Qt::gray);
+    //painter->drawRect(boundingRect());
+    QPixmap ninja(":/imagen/pared-de-ladrillo.png");
+    painter->drawPixmap(boundingRect(),ninja,ninja.rect());
+
 }

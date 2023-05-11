@@ -44,7 +44,9 @@ void pared::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
 {
     QColor myGray(50, 50, 50);
     painter->setBrush(myGray);
-    //painter->setBrush(Qt::gray);
+
     painter->drawRect(boundingRect());
+
+
 }
 

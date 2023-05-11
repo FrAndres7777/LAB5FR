@@ -59,16 +59,16 @@
       <x>0</x>
       <y>-1</y>
       <width>521</width>
-      <height>31</height>
+      <height>51</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Pristina</family>
-      <pointsize>15</pointsize>
+      <family>Terminal</family>
+      <pointsize>20</pointsize>
       <bold>true</bold>
       <underline>true</underline>
-      <strikeout>true</strikeout>
+      <strikeout>false</strikeout>
      </font>
     </property>
     <property name="text">

@@ -200,8 +200,13 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
 
     if(evento->key()==Qt::Key_W)
     {
+
         if(!EvaluarColision() and !EvaluarColision2()){
             Franklin->MoveUp();
+            if(EvaluarColision() or EvaluarColision2()){
+                Franklin->MoveDown();
+
+            }
 
         }else{
             Franklin->MoveDown();
@@ -215,6 +220,10 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
     {
         if(!EvaluarColision() and !EvaluarColision2()){
             Franklin->MoveDown();
+            if(EvaluarColision() or EvaluarColision2()){
+                Franklin->MoveUp();
+
+            }
 
         }else{
             Franklin->MoveUp();
@@ -225,6 +234,10 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
     {
         if(!EvaluarColision() and !EvaluarColision2()){
             Franklin->MoveRight();
+            if(EvaluarColision() or EvaluarColision2()){
+                Franklin->MoveLeft();
+
+            }
 
         }else{
             Franklin->MoveLeft();
@@ -234,14 +247,11 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
     else if(evento->key()==Qt::Key_A)
     {
         if(!EvaluarColision() and !EvaluarColision2()){
-
             Franklin->MoveLeft();
+            if(EvaluarColision() or EvaluarColision2()){
+                Franklin->MoveRight();
 
-
-
-
-
-
+            }
         }else{
 
             Franklin->MoveRight();
@@ -388,6 +398,8 @@ void MainWindow::EvaluarColision3()
                 }
         }
     }
+
+    return;
 
 
 
