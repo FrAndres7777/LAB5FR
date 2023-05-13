@@ -1,10 +1,8 @@
-
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <cstdlib>
 #include <ctime>
-
-
+#include <list>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -17,13 +15,15 @@ MainWindow::MainWindow(QWidget *parent)
     scene->setSceneRect(0,0,1200,650);
     //CREAMOS EL BOMBER
     Franklin = new BOMBER (25,25,20);
-
     Enemigo = new ENEMY(575,275,25);
     Enemigo2 = new ENEMY(575,50,25);
+    Enemigo3= new ENEMY(25,275,25);
+    Enemigo2->setVelocidad(25);
     //hacer que bomber haga parte del acto (scena)
     scene->addItem(Franklin);
     scene->addItem(Enemigo);
     scene->addItem(Enemigo2);
+    scene->addItem(Enemigo3);
 
 
     paredes.push_back(new pared(0,0,1200,50));
@@ -46,11 +46,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect(timer2,SIGNAL(timeout()),this, SLOT(moverEnemigo2()));
     timer2->stop();
 
-
-
-
-
-
     for(int i = 0 ; i < 7 ; i++){
         for(int j = 0 ; j< 13 ;j++){
             paredes.push_back(new pared(50*j,50*i,50,50));
@@ -70,7 +65,7 @@ MainWindow::MainWindow(QWidget *parent)
     int random_2 = 0;
 
 
-    for(int cbloq = 0 ; cbloq < 45 ;cbloq++){
+    for(int cbloq = 0 ; cbloq < 20 ;cbloq++){
         random_1 = rand() % 11 + 1 ;
         if(random_1%2==0){
             random_2 = rand() % 11 +1;
@@ -82,7 +77,7 @@ MainWindow::MainWindow(QWidget *parent)
             }
 
         }else{
-            random_2 = rand() % 21 +2;
+            random_2 = rand() % 20 +2;
             paredes2.push_back(new pared2(25*random_2,25*random_1,50,50));
             scene->addItem(paredes2.back());
             if(cbloq==5){
@@ -98,17 +93,12 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
 
-
-
-
-
-
-
 }
 
 
 void MainWindow:: moverEnemigo(){
     moverEnemigo2();
+    moverEnemigo3();
     int xE= 0, yE = 0, xJ= 0, yJ = 0;
     xE= Enemigo->getPosx();
     yE = Enemigo->getPosy();
@@ -142,15 +132,134 @@ void MainWindow:: moverEnemigo(){
     }
 
 
-
-
-
 }
 
 void MainWindow:: moverEnemigo2(){
+
+
+
+
+    int numero = std::rand() % 4+1;
+
+    switch(numero) {
+    case 1:
+        Enemigo2->MoveDown();
+        if(Franklin->collidesWithItem(Enemigo2))close();
+        if(EvaluarColisionE() or  EvaluarColisionE2()){
+            Enemigo2->MoveUp();
+            if(Franklin->collidesWithItem(Enemigo2))close();
+            Enemigo2->MoveUp();
+            if(Franklin->collidesWithItem(Enemigo2))close();
+            if(EvaluarColisionE() or  EvaluarColisionE2()){
+                Enemigo2->MoveDown();
+                if(Franklin->collidesWithItem(Enemigo2))close();
+
+
+                Enemigo2->MoveLeft();
+                if(Franklin->collidesWithItem(Enemigo2))close();
+                if(EvaluarColisionE() or  EvaluarColisionE2()){
+                    Enemigo2->MoveRight();
+                    if(Franklin->collidesWithItem(Enemigo2))close();
+                    Enemigo2->MoveRight();
+                    if(Franklin->collidesWithItem(Enemigo2))close();
+                    if(EvaluarColisionE() or  EvaluarColisionE2()){
+                        Enemigo2->MoveLeft();
+                        if(Franklin->collidesWithItem(Enemigo2))close();
+                    }
+
+                }
+           }
+        }
+
+        break;
+    case 2:
+        Enemigo2->MoveUp();
+        if(Franklin->collidesWithItem(Enemigo2))close();
+        if(EvaluarColisionE() or  EvaluarColisionE2()){
+             Enemigo2->MoveDown();
+           if(Franklin->collidesWithItem(Enemigo2))close();
+            Enemigo2->MoveLeft();
+           if(Franklin->collidesWithItem(Enemigo2))close();
+            if(EvaluarColisionE() or  EvaluarColisionE2()){
+                Enemigo2->MoveRight();
+                if(Franklin->collidesWithItem(Enemigo2))close();
+                Enemigo2->MoveRight();
+                if(Franklin->collidesWithItem(Enemigo2))close();
+                if(EvaluarColisionE() or  EvaluarColisionE2()){
+                    Enemigo2->MoveLeft();
+                    if(Franklin->collidesWithItem(Enemigo2))close();
+                }
+            }
+        }
+
+        break;
+    case 3:
+         Enemigo2->MoveLeft();
+        if(Franklin->collidesWithItem(Enemigo2))close();
+        if(EvaluarColisionE() or  EvaluarColisionE2()){
+             Enemigo2->MoveRight();
+            if(Franklin->collidesWithItem(Enemigo2))close();
+            Enemigo2->MoveRight();
+            if(Franklin->collidesWithItem(Enemigo2))close();
+            if(EvaluarColisionE() or  EvaluarColisionE2()){
+                Enemigo2->MoveLeft();
+                if(Franklin->collidesWithItem(Enemigo2))close();
+                Enemigo2->MoveDown();
+                if(Franklin->collidesWithItem(Enemigo2))close();
+                if(EvaluarColisionE() or  EvaluarColisionE2()){
+                    Enemigo2->MoveUp();
+                    if(Franklin->collidesWithItem(Enemigo2))close();
+                    Enemigo2->MoveRight();
+                    if(Franklin->collidesWithItem(Enemigo2))close();
+                    if(EvaluarColisionE() or  EvaluarColisionE2()){
+                        Enemigo2->MoveLeft();
+                        if(Franklin->collidesWithItem(Enemigo2))close();
+                    }
+                }
+            }
+        }
+        break;
+    case 4:
+        Enemigo2->MoveRight();
+        if(Franklin->collidesWithItem(Enemigo2))close();
+        if(EvaluarColisionE() or  EvaluarColisionE2()){
+            Enemigo2->MoveLeft();
+            if(Franklin->collidesWithItem(Enemigo2))close();
+            Enemigo2->MoveLeft();
+            if(Franklin->collidesWithItem(Enemigo2))close();
+            if(EvaluarColisionE() or  EvaluarColisionE2()){
+                Enemigo2->MoveRight();
+                if(Franklin->collidesWithItem(Enemigo2))close();
+                Enemigo2->MoveDown();
+                if(Franklin->collidesWithItem(Enemigo2))close();
+
+                if(EvaluarColisionE() or  EvaluarColisionE2()){
+                    Enemigo2->MoveUp();
+                    if(Franklin->collidesWithItem(Enemigo2))close();
+                    Enemigo2->MoveRight();
+                    if(Franklin->collidesWithItem(Enemigo2))close();
+                    if(EvaluarColisionE() or  EvaluarColisionE2()){
+                        Enemigo2->MoveLeft();
+                        if(Franklin->collidesWithItem(Enemigo2))close();
+                    }
+                }
+            }
+        }
+
+
+
+        break;
+
+
+
+    }
+}
+
+void MainWindow::moverEnemigo3()
+{
     int xE= 0, yE = 0, xJ= 0, yJ = 0;
-    xE= Enemigo2->getPosx();
-    yE = Enemigo2->getPosy();
+    xE= Enemigo3->getPosx();
+    yE = Enemigo3->getPosy();
     xJ= Franklin->getPosx();
     yJ = Franklin->getPosy();
     int Dx=0,Dy=0;
@@ -167,50 +276,38 @@ void MainWindow:: moverEnemigo2(){
     }
     if(Dx>Dy){
         if(xE-xJ<0){
-            Enemigo2->MoveRight();
+            Enemigo3->MoveRight();
 
         }else{
-            Enemigo2->MoveLeft();
+            Enemigo3->MoveLeft();
         }
     }else{
         if(yE-yJ<0){
-            Enemigo2->MoveDown();
+            Enemigo3->MoveDown();
         }else{
-            Enemigo2->MoveUp();
+            Enemigo3->MoveUp();
         }
     }
-
-
-
-
 
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *evento)
 {
 
-    //int x,y;
-    //x=Franklin->getPosx();
-    //y=Franklin->getPosy();
+
     imprimirpPuntaje();
-    if(Franklin->collidesWithItem(Enemigo) or Franklin->collidesWithItem(Enemigo2) or Franklin->collidesWithItem(Franklin2)){
+    if(Franklin->collidesWithItem(Enemigo3) or Franklin->collidesWithItem(Enemigo2) or Franklin->collidesWithItem(Franklin2)){
         close();
     }
-
-
     if(evento->key()==Qt::Key_W)
     {
 
         if(!EvaluarColision() and !EvaluarColision2()){
             Franklin->MoveUp();
+
             if(EvaluarColision() or EvaluarColision2()){
                 Franklin->MoveDown();
-
             }
-
-        }else{
-            Franklin->MoveDown();
-            //Franklin->setPos(x,y+10);
 
         }
 
@@ -222,13 +319,8 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
             Franklin->MoveDown();
             if(EvaluarColision() or EvaluarColision2()){
                 Franklin->MoveUp();
-
             }
-
-        }else{
-            Franklin->MoveUp();
         }
-
     }
     else if(evento->key()==Qt::Key_D)
     {
@@ -236,13 +328,8 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
             Franklin->MoveRight();
             if(EvaluarColision() or EvaluarColision2()){
                 Franklin->MoveLeft();
-
             }
-
-        }else{
-            Franklin->MoveLeft();
         }
-
     }
     else if(evento->key()==Qt::Key_A)
     {
@@ -250,16 +337,13 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
             Franklin->MoveLeft();
             if(EvaluarColision() or EvaluarColision2()){
                 Franklin->MoveRight();
-
             }
         }else{
-
             Franklin->MoveRight();
-
-
         }
 
    }else if(evento->key()==Qt::Key_Space){
+
         for(auto it = GRANADAS_FUEGO.begin(); it != GRANADAS_FUEGO.end();it++){
             scene->removeItem(*it);
         }
@@ -276,13 +360,9 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
         QTimer::singleShot(4000,this, SLOT(INCINERAR()));
 
 
-
-
-
-
-
    }
    if(evento->key()== Qt::Key_M){
+
         if(timer->isActive()) {timer->stop();
         }else {timer->start(50);
             }
@@ -290,7 +370,7 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
         if(timer2->isActive()) {
             timer2->stop();
         }else{
-            timer2->start(50);
+            timer2->start(3000);
         }
 
    }
@@ -313,6 +393,31 @@ bool MainWindow::EvaluarColision()
     }
     return false;
 }
+bool MainWindow::EvaluarColisionE()
+{
+    QList<pared*>::Iterator it;
+    for(it=paredes.begin();it!= paredes.end();it++){
+        if((*it)->collidesWithItem(Enemigo2))
+        {
+            return true;
+        }
+    }
+    return false;
+
+
+}
+
+bool MainWindow::EvaluarColisionE2()
+{
+    QList<pared2*>::Iterator it;
+    for(it=paredes2.begin();it!= paredes2.end();it++){
+        if((*it)->collidesWithItem(Enemigo2))
+        {
+            return true;
+        }
+    }
+    return false;
+}
 
 bool MainWindow::EvaluarColision2()
 {
@@ -320,10 +425,6 @@ bool MainWindow::EvaluarColision2()
     for(it=paredes2.begin();it!= paredes2.end();it++){
         if((*it)->collidesWithItem(Franklin))
         {
-
-            //scene->removeItem(*it);
-            //paredes2.removeOne(*it);
-
             return true;
         }
     }
@@ -403,13 +504,6 @@ void MainWindow::EvaluarColision3()
 
 
 
-
-    // QTimer::singleShot(500,this, SLOT(VaciarListas()));
-
-
-
-
-    return ;
 
 }
 

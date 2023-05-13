@@ -36,7 +36,7 @@ void ENEMY::setVelocidad(int newVelocidad)
 ENEMY::ENEMY()
 {
     this->radio=25;
-    this->velocidad=1;
+    this->velocidad=5;
 
 }
 
@@ -47,7 +47,7 @@ ENEMY::ENEMY(int x, int y, int r)
     this->posx=x;
     this->posy=y;
     this->radio=r;
-    this->velocidad=1.0;
+    this->velocidad=1.5;
     setPos(posx,posy);
 }
 

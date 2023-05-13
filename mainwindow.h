@@ -12,6 +12,7 @@
 #include <pared2.h>
 #include <QList>
 #include <bomba.h>
+#include <QDebug>
 
 #include <QGraphicsRectItem>
 
@@ -34,6 +35,7 @@ private slots:
     void INCINERAR();
     void moverEnemigo();
     void moverEnemigo2();
+    void moverEnemigo3();
 
 private:
 
@@ -44,6 +46,7 @@ private:
     BOMBER *Franklin2;//compañero a encontar
     ENEMY  *Enemigo;// neas fantasmas
     ENEMY  *Enemigo2;// nea 2
+     ENEMY  *Enemigo3;// nea 3
 
     void keyPressEvent(QKeyEvent *evento);
     QList<pared*> paredes;
@@ -56,6 +59,8 @@ private:
     bool EvaluarColision();
     bool EvaluarColision2();
     void EvaluarColision3();
+    bool EvaluarColisionE();
+    bool EvaluarColisionE2();
     void VaciarListas();
 
     int puntaje=0;

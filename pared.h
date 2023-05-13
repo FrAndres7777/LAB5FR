@@ -5,9 +5,6 @@
 #ifndef PARED_H
 #define PARED_H
 
-
-
-
 class pared :  public QGraphicsItem
 {
     int posx,posy,alto,bajo;

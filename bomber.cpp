@@ -45,7 +45,7 @@ BOMBER::BOMBER(int x, int y, int r)
     this->posx=x;
     this->posy=y;
     this->radio=r;
-    this->velocidad=5;
+    this->velocidad=10;
     setPos(posx,posy);
 }
 
@@ -56,8 +56,7 @@ QRectF BOMBER::boundingRect() const
 
 void BOMBER::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    //painter->setBrush(Qt::red);
-    //painter->drawEllipse(boundingRect());
+
     QPixmap ninja(":/imagen/ninja.png");
     painter->drawPixmap(boundingRect(),ninja,ninja.rect());
 
