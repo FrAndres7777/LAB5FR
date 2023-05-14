@@ -43,8 +43,11 @@ MainWindow::MainWindow(QWidget *parent)
 
     timer->stop();
     timer2 =  new QTimer;
+    timer3 =  new QTimer;
     connect(timer2,SIGNAL(timeout()),this, SLOT(moverEnemigo2()));
+    connect(timer3,SIGNAL(timeout()),this, SLOT(moverBombas()));
     timer2->stop();
+     timer3->stop();
 
     for(int i = 0 ; i < 7 ; i++){
         for(int j = 0 ; j< 13 ;j++){
@@ -56,6 +59,8 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     // Generamos mapa aleatorio
+
+
 
     srand(time(NULL));
 
@@ -92,11 +97,11 @@ MainWindow::MainWindow(QWidget *parent)
 
     }
 
-
 }
 
 
 void MainWindow:: moverEnemigo(){
+
     moverEnemigo2();
     moverEnemigo3();
     int xE= 0, yE = 0, xJ= 0, yJ = 0;
@@ -346,18 +351,26 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
 
         for(auto it = GRANADAS_FUEGO.begin(); it != GRANADAS_FUEGO.end();it++){
             scene->removeItem(*it);
+
+
         }
         GRANADAS_FUEGO.clear();
 
         for(auto it2 = GRANADAS_EXPLOXION.begin(); it2 != GRANADAS_EXPLOXION.end();it2++){
             scene->removeItem(*it2);
+
         }
-        GRANADAS_EXPLOXION.clear();
+
+
+
+
+
 
         GRANADAS_FUEGO.push_back(new BOMBA(Franklin->getPosx(),Franklin->getPosy(),40,40));
         scene->addItem(GRANADAS_FUEGO.back());
         //INCINERAR();
         QTimer::singleShot(4000,this, SLOT(INCINERAR()));
+
 
 
    }
@@ -371,6 +384,7 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
             timer2->stop();
         }else{
             timer2->start(3000);
+
         }
 
    }
@@ -439,8 +453,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::INCINERAR()
 {
-    //GRANADAS_EXPLOXION.push_back( new BOMBA(25,50,10,10));
-    //scene->addItem(GRANADAS_EXPLOXION.back());
+
+
+
     for(auto it = GRANADAS_FUEGO.begin(); it != GRANADAS_FUEGO.end();it++){
         //scene->removeItem(*it);
         int x= (*it)->getPosx();
@@ -457,18 +472,23 @@ void MainWindow::INCINERAR()
 
             GRANADAS_EXPLOXION.push_back(new BOMBA((x),y-25-i,40,40));
             scene->addItem(GRANADAS_EXPLOXION.back());
+
         }
     }
-    EvaluarColision3();
-    //QTimer::singleShot(1000,this, SLOT(VaciarListas()));
+     EvaluarColision3();
+
+
 
 }
 
 void MainWindow::EvaluarColision3()
 {
     QList<pared2*>::Iterator it;
+    int contador =0;
     for(it=paredes2.begin();it!= paredes2.end();it++){
         for(auto it2 =GRANADAS_EXPLOXION.begin();  it2!= GRANADAS_EXPLOXION.end(); it2++){
+
+
             if((*it)->collidesWithItem(*it2)){
                 scene->removeItem(*it);
                 paredes2.removeOne(*it);
@@ -491,7 +511,7 @@ void MainWindow::EvaluarColision3()
                 Enemigo2= new ENEMY(0,0,0);
                 Enemigo2->setVelocidad(0);
                 Enemigo2->setPos(0,0);
-                //scene->removeItem(Enemigo2); // Elimina el objeto de la escena
+                scene->removeItem(Enemigo2); // Elimina el objeto de la escena
                 //delete Enemigo2; // Elimina el objeto de la memoria
                 //Enemigo2 = nullptr; // Asigna un puntero nulo para evitar problemas de punteros invalidos
                 break;
@@ -499,6 +519,8 @@ void MainWindow::EvaluarColision3()
                 }
         }
     }
+
+
 
     return;
 
@@ -511,18 +533,24 @@ void MainWindow::VaciarListas()
 {
     for(auto it = GRANADAS_FUEGO.begin(); it != GRANADAS_FUEGO.end();it++){
         scene->removeItem(*it);
-    }
-    //GRANADAS_FUEGO.clear();
 
-    for(auto it2 = GRANADAS_EXPLOXION.begin(); it2 != GRANADAS_EXPLOXION.end();it2++){
-        scene->removeItem(*it2);
+        delete *it;
+        *it = nullptr;
     }
-    //GRANADAS_EXPLOXION.clear();
+    GRANADAS_FUEGO.removeAll(nullptr);
+
+
 }
 
-
-//scene->removeItem(*it);
-//paredes2.removeOne(*it);
+void MainWindow::VaciarListas2()
+{
+    for(auto it2 = GRANADAS_EXPLOXION.begin(); it2 != GRANADAS_EXPLOXION.end();it2++){
+        scene->removeItem(*it2);
+        delete *it2;
+        *it2 = nullptr;
+    }
+    GRANADAS_EXPLOXION.removeAll(nullptr);
+}
 
 
 

@@ -60,7 +60,7 @@ void ENEMY::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
 {
     //painter->setBrush(Qt::red);
     //painter->drawEllipse(boundingRect());
-    QPixmap ninja(":/imagen/fantasma.png");
+    QPixmap ninja(":/imagen/fantasma (1).png");
     painter->drawPixmap(boundingRect(),ninja,ninja.rect());
 
 

@@ -16,6 +16,9 @@
 
 #include <QGraphicsRectItem>
 
+#include <QMediaPlayer>
+#include <QtMultimedia>
+
 
 
 QT_BEGIN_NAMESPACE
@@ -37,6 +40,7 @@ private slots:
     void moverEnemigo2();
     void moverEnemigo3();
 
+
 private:
 
     Ui::MainWindow *ui;// *UI PUNTERO A LA INTERFAZ GRA  // REFERNCIA PARA CADA UNO DE LOS OBJETOS
@@ -53,6 +57,7 @@ private:
 
     QTimer *timer;
     QTimer *timer2;
+    QTimer *timer3;
 
     QList<pared2*> paredes2;
     void imprimirpPuntaje();
@@ -62,6 +67,12 @@ private:
     bool EvaluarColisionE();
     bool EvaluarColisionE2();
     void VaciarListas();
+    void VaciarListas2();
+    void moverBombas();
+
+    //sonido
+    //QMediaPlayer *sound;
+
 
     int puntaje=0;
 

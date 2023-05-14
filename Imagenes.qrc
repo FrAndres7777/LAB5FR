@@ -2,12 +2,8 @@
     <qresource prefix="/imagen">
         <file>ninja.png</file>
         <file>fuego.png</file>
-        <file>fantasma.png</file>
-        <file>fondo_Mesa.png</file>
         <file>pared-de-ladrillo.png</file>
-        <file>1000_F_596022965_x2gSxabIbL6aHwSj1pkWRnILRtDcNZEa.png</file>
-        <file>47e3c8627a14e539fc18ebb518bfdbca.png</file>
-        <file>BLACKPARED.png</file>
+        <file>fantasma (1).png</file>
     </qresource>
     <qresource prefix="/new/prefix1"/>
     <qresource prefix="/"/>

@@ -18,9 +18,9 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>0</y>
+      <y>-1</y>
       <width>1500</width>
-      <height>800</height>
+      <height>801</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -30,16 +30,16 @@
    <widget class="QLabel" name="lblPuntaje">
     <property name="geometry">
      <rect>
-      <x>530</x>
+      <x>510</x>
       <y>0</y>
-      <width>231</width>
-      <height>31</height>
+      <width>291</width>
+      <height>91</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>Garamond</family>
-      <pointsize>22</pointsize>
+      <pointsize>28</pointsize>
       <italic>true</italic>
       <bold>false</bold>
       <underline>true</underline>
@@ -57,18 +57,20 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>-1</y>
-      <width>521</width>
-      <height>51</height>
+      <y>-20</y>
+      <width>551</width>
+      <height>111</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Terminal</family>
-      <pointsize>20</pointsize>
+      <family>Tw Cen MT</family>
+      <pointsize>22</pointsize>
+      <italic>true</italic>
       <bold>true</bold>
       <underline>true</underline>
       <strikeout>false</strikeout>
+      <kerning>false</kerning>
      </font>
     </property>
     <property name="text">
