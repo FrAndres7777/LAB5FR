@@ -10,7 +10,7 @@ float BOMBA::getPosx() const
     return posx;
 }
 
-void BOMBA::setPosx(float newPosx)
+void BOMBA::setPosx(int newPosx)
 {
     posx = newPosx;
 }
@@ -20,7 +20,7 @@ float BOMBA::getPosy() const
     return posy;
 }
 
-void BOMBA::setPosy(float newPosy)
+void BOMBA::setPosy(int newPosy)
 {
     posy = newPosy;
 }
@@ -51,7 +51,7 @@ void BOMBA::MoveRight()
 
 
 
-BOMBA::BOMBA(float x, float y, int alto, int bajo)
+BOMBA::BOMBA(int x, int y, int alto, int bajo)
 {
     this->posx=x;
     this->posy=y;
@@ -73,14 +73,14 @@ void BOMBA::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
 
 }
 
-void BOMBA::posicion(float newX, float newY)
+void BOMBA::posicion(int newX, int newY)
 {
     posx=newX;
     posy=newY;
     setPos(posx,posy);
 }
 
-void BOMBA::shot(float velx,float vel)
+void BOMBA::shot(int velx,int vel)
 {
     posicion(posx+velx,posy+vel);
 }

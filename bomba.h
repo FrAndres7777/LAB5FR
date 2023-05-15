@@ -20,23 +20,23 @@ class BOMBA: public QGraphicsItem
 public:
     BOMBA();
 
-    BOMBA(float x, float y , int alto , int bajo);
+    BOMBA(int x, int y , int alto , int bajo);
     QRectF boundingRect() const;//LIMITES DEL RECTANGULO QUE DELIMITA TU OBJETO
     //paint como se mostrara pintado
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                QWidget *widget= nullptr);
 
     float getPosx() const;
-    void setPosx(float newPosx);
+    void setPosx(int newPosx);
     float getPosy() const;
-    void setPosy(float  newPosy);
+    void setPosy(int  newPosy);
 
     void MoveUp();
     void MoveDown();
     void MoveLeft();
     void MoveRight();
-    void posicion(float newX, float newY);
-    void shot(float velx ,float vel);
+    void posicion(int newX,int newY);
+    void shot(int velx ,int vel);
 };
 
 #endif // BOMBA_H

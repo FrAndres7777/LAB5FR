@@ -38,3 +38,5 @@ RESOURCES += \
 
 DISTFILES +=
 QT += multimedia
+OTHER_FILES += \
+    path/to/musicfile.mp3

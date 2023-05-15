@@ -17,7 +17,10 @@
 #include <QGraphicsRectItem>
 
 #include <QMediaPlayer>
-#include <QtMultimedia>
+
+//#include <QMediaPlaylist>
+
+
 
 
 
@@ -72,6 +75,9 @@ private:
 
     //sonido
     //QMediaPlayer *sound;
+
+    QMediaPlayer *musicPlayer;
+    //QMediaPlaylist *musicPlaylist;
 
 
     int puntaje=0;

@@ -96,6 +96,11 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     }
+    //musicPlayer = new QMediaPlayer(this);
+    //musicPlaylist = new QMediaPlaylist(this);
+    //musicPlaylist->addMedia(QUrl(":/Music/RDRFRAudio.mp3"));  // Ruta del archivo de música en tu proyecto
+   // musicPlaylist->setPlaybackMode(QMediaPlaylist::Loop);  // Establece el modo de reproducción (en bucle en este caso)
+    //musicPlayer->setPlaylist(musicPlaylist);
 
 }
 
@@ -360,6 +365,7 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
             scene->removeItem(*it2);
 
         }
+        // GRANADAS_EXPLOXION.clear();
 
 
 
@@ -461,17 +467,17 @@ void MainWindow::INCINERAR()
         int x= (*it)->getPosx();
         int y = (*it)->getPosy();
         for(float i = 1.0; i<28.0;i=i+7.5){
-            GRANADAS_EXPLOXION.push_back(new BOMBA((x+25+i),y,40,40));
-            scene->addItem(GRANADAS_EXPLOXION.back());
+            GRANADAS_EXPLOXION.push_front(new BOMBA((x+25+i),y,40,40));
+            scene->addItem(GRANADAS_EXPLOXION.front());
 
-            GRANADAS_EXPLOXION.push_back(new BOMBA((x-25-i),y,40,40));
-            scene->addItem(GRANADAS_EXPLOXION.back());
+            GRANADAS_EXPLOXION.push_front(new BOMBA((x-25-i),y,40,40));
+            scene->addItem(GRANADAS_EXPLOXION.front());
 
-            GRANADAS_EXPLOXION.push_back(new BOMBA((x),y+25+i,40,40));
-            scene->addItem(GRANADAS_EXPLOXION.back());
+            GRANADAS_EXPLOXION.push_front(new BOMBA((x),y+25+i,40,40));
+            scene->addItem(GRANADAS_EXPLOXION.front());
 
-            GRANADAS_EXPLOXION.push_back(new BOMBA((x),y-25-i,40,40));
-            scene->addItem(GRANADAS_EXPLOXION.back());
+            GRANADAS_EXPLOXION.push_front(new BOMBA((x),y-25-i,40,40));
+            scene->addItem(GRANADAS_EXPLOXION.front());
 
         }
     }
@@ -486,7 +492,8 @@ void MainWindow::EvaluarColision3()
     QList<pared2*>::Iterator it;
     int contador =0;
     for(it=paredes2.begin();it!= paredes2.end();it++){
-        for(auto it2 =GRANADAS_EXPLOXION.begin();  it2!= GRANADAS_EXPLOXION.end(); it2++){
+        contador =0;
+        for(auto it2 =GRANADAS_EXPLOXION.begin();  it2!= GRANADAS_EXPLOXION.end() and contador <16; it2++,contador++){
 
 
             if((*it)->collidesWithItem(*it2)){
