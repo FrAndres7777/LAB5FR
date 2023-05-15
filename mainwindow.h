@@ -17,6 +17,9 @@
 #include <QGraphicsRectItem>
 
 #include <QMediaPlayer>
+#include <QFileInfo>
+#include <QFile>
+
 
 //#include <QMediaPlaylist>
 
@@ -27,6 +30,9 @@
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
+
+
+class  QMediaPlayer;
 
 class MainWindow : public QMainWindow
 
@@ -43,6 +49,16 @@ private slots:
     void moverEnemigo2();
     void moverEnemigo3();
 
+
+    void on_Abrir_clicked();
+
+    void on_Pause_clicked();
+
+    void on_Play_clicked();
+
+    void on_Stop_clicked();
+
+    void on_verticalSlider_valueChanged(int value);
 
 private:
 
@@ -76,7 +92,8 @@ private:
     //sonido
     //QMediaPlayer *sound;
 
-    QMediaPlayer *musicPlayer;
+    QMediaPlayer *sound;
+
     //QMediaPlaylist *musicPlaylist;
 
 

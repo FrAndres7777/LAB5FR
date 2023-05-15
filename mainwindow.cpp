@@ -3,6 +3,9 @@
 #include <cstdlib>
 #include <ctime>
 #include <list>
+
+#include <QFileDialog>
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -96,7 +99,18 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     }
-    //musicPlayer = new QMediaPlayer(this);
+
+
+    //sonido
+    //sound = new QMediaPlayer();
+    //sound->setMedia(QUrl(":/Music/RDRFRAudio.mp3"));
+    //sonido
+    //sound->play();
+    //connect(ui->botonPlay, &QPushButton::clicked, reproductor, &QMediaPlayer::play);
+    //connect(ui->botonPausa, &QPushButton::clicked, reproductor, &QMediaPlayer::pause);
+    //connect(ui->botonStop, &QPushButton::clicked, reproductor, &QMediaPlayer::stop);
+
+
     //musicPlaylist = new QMediaPlaylist(this);
     //musicPlaylist->addMedia(QUrl(":/Music/RDRFRAudio.mp3"));  // Ruta del archivo de música en tu proyecto
    // musicPlaylist->setPlaybackMode(QMediaPlaylist::Loop);  // Establece el modo de reproducción (en bucle en este caso)
@@ -561,4 +575,42 @@ void MainWindow::VaciarListas2()
 
 
 
+
+
+void MainWindow::on_Abrir_clicked()
+{
+    QString filename = QFileDialog::getOpenFileName(this,"Abrir");
+    //(*musicPlayer)->setMedia(QUrl::fromLocalFile(nombreArchivo));
+    if (filename.isEmpty()){
+        return;
+    }
+    //*(mMediaPlayer)->setMedia(QUrl::fromLocalFile(filename));
+
+    on_Play_clicked();
+
+}
+
+
+void MainWindow::on_Pause_clicked()
+{
+
+}
+
+
+void MainWindow::on_Play_clicked()
+{
+
+}
+
+
+void MainWindow::on_Stop_clicked()
+{
+
+}
+
+
+void MainWindow::on_verticalSlider_valueChanged(int value)
+{
+
+}
 
